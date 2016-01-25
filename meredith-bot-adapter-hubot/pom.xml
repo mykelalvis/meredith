@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright (C) 2015 Cotiviti Labs (nexgen.admin@cotiviti.io)
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+            http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
+<!-- Copyright (C) 2015 Cotiviti Labs (nexgen.admin@cotiviti.io) Licensed 
+	under the Apache License, Version 2.0 (the "License"); you may not use this 
+	file except in compliance with the License. You may obtain a copy of the 
+	License at http://www.apache.org/licenses/LICENSE-2.0 Unless required by 
+	applicable law or agreed to in writing, software distributed under the License 
+	is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY 
+	KIND, either express or implied. See the License for the specific language 
+	governing permissions and limitations under the License. -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>io.cotiviti.meredith</groupId>
+		<artifactId>meredith-parent</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+		<relativePath>../meredith-parent/pom.xml</relativePath>
+	</parent>
+	<artifactId>meredith-bot-adapter-hubot</artifactId>
+	<version>1.0.0</version>
+	<packaging>pom</packaging>
+	<name>hubot-renamed-bot</name>
+	<description>a bot that performs the respond-to-rename from the example scripts</description>
+	<properties>
+		<node.filter.dir>${project.build.directory}/node-package</node.filter.dir>
+		<node.filter.javascript.source>false</node.filter.javascript.source>
+	</properties>
+	<url>http://${team.group.id}.github.io/${project.artifactId}/${site.path}/</url>
+	<scm>
+		<connection>scm:git:${git.http.url}</connection>
+		<url>${git.http.url}/tree/${GITHUB.BRANCH}</url>
+		<developerConnection>scm:git:${git.url}</developerConnection>
+		<tag>HEAD</tag>
+	</scm>
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy-coffee-source</id>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<phase>generate-sources</phase>
+						<configuration>
+							<resources>
+								<resource>
+									<directory>${basedir}/src/main/coffee</directory>
+									<filtering>${node.filter.javascript.source}</filtering>
+								</resource>
+							</resources>
+							<outputDirectory>${node.filter.dir}/src</outputDirectory>
+						</configuration>
+					</execution>
+					<execution>
+						<id>copy-javascript-source</id>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<phase>generate-sources</phase>
+						<configuration>
+							<resources>
+								<resource>
+									<directory>${basedir}/src/main/javascript</directory>
+									<filtering>${node.filter.javascript.source}</filtering>
+								</resource>
+							</resources>
+							<outputDirectory>${node.filter.dir}/src</outputDirectory>
+						</configuration>
+					</execution>
+					<execution>
+						<id>copy-resources</id>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<phase>generate-resources</phase>
+						<configuration>
+							<resources>
+								<resource>
+									<directory>${basedir}/src/main/commonjs</directory>
+									<filtering>true</filtering>
+								</resource>
+							</resources>
+							<outputDirectory>${node.filter.dir}</outputDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>com.github.eirslett</groupId>
+				<artifactId>frontend-maven-plugin</artifactId>
+				<configuration>
+					<installDirectory>${project.build.directory}/node</installDirectory>
+					<downloadRoot>file://${user.home}/.m2/LOCALINSTALL/</downloadRoot>
+				</configuration>
+				<executions>
+					<execution>
+						<id>install-node-and-npm</id>
+						<goals>
+							<goal>install-node-and-npm</goal>
+						</goals>
+						<configuration>
+							<nodeVersion>${node.version}</nodeVersion>
+							<npmVersion>${npm.version}</npmVersion>
+						</configuration>
+					</execution>
+					<execution>
+						<id>npminstall</id>
+						<goals>
+							<goal>npm</goal>
+						</goals>
+						<configuration>
+							<workingDirectory>${node.filter.dir}</workingDirectory>
+							<arguments>install</arguments>
+						</configuration>
+					</execution>
+					<execution>
+						<id>npm-run-build</id>
+						<goals>
+							<goal>npm</goal>
+						</goals>
+						<configuration>
+							<workingDirectory>${node.filter.dir}</workingDirectory>
+							<arguments>shrinkwrap</arguments>
+						</configuration>
+					</execution>
+					<execution>
+						<id>npm-package</id>
+						<goals>
+							<goal>npm</goal>
+						</goals>
+						<phase>package</phase>
+						<configuration>
+							<workingDirectory>${node.filter.dir}</workingDirectory>
+							<arguments>pack</arguments>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>

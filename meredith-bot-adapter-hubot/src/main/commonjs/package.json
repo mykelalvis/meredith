@@ -1,0 +1,27 @@
+{
+	"name":"${project.artifactId}",
+	"version":"${project.version}",
+	"author":"@mykelalvis <mykel.alvis@gmail.com>",
+	"license":"Apache 2.0",
+	"description":"${project.description}",
+	"repository":{
+		"type":"git",
+		"url":"${project.scm.url}"
+	},
+	"dependencies":{
+	    "sockjs-client": "1.0.0",
+	    "vertx3-eventbus-client": "3.2.0"
+	},
+	"jspm":{
+		"dependencies":{
+		
+		},
+		"devDependencies":{
+			
+		}
+	},
+	"scripts":{
+		"prebuild":"npm install",
+		"build":"gulp"
+	}
+}

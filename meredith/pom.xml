@@ -20,48 +20,15 @@
                       http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>io.cotiviti</groupId>
-		<artifactId>cotiviti-nexgen-parent</artifactId>
-		<version>0.2.22-SNAPSHOT</version>
+		<groupId>io.cotiviti.meredith</groupId>
+		<artifactId>meredith-parent</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+		<relativePath>../meredith-parent/pom.xml</relativePath>
 	</parent>
-	<groupId>io.cotiviti.meredith</groupId>
-	<artifactId>meredith-framework</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<packaging>pom</packaging>
-	<description>Meredith is a framework for building scalable ChatOps automation with Vert.x</description>
+	<artifactId>meredith</artifactId>
+	<packaging>jar</packaging>
 	<!-- URL for site gen -->
 	<url>${ghe.url.base}/${project.artifactId}</url>
-	<scm>
-		<connection>scm:git:${git.url}</connection>
-		<url>scm:git:${git.url}</url>
-		<developerConnection>scm:git:${git.url}</developerConnection>
-		<tag>HEAD</tag>
-	</scm>
-	<properties>
-		<vertx.version>3.2.0</vertx.version>
-		<node.version>v0.12.2</node.version>
-		<npm.version>2.7.6</npm.version>
-	</properties>
-	<distributionManagement>
-		<repository>
-			<uniqueVersion>false</uniqueVersion>
-			<id>central</id>
-			<name>Proxy Releases</name>
-			<url>${proxy.url.base}/libs-releases-local</url>
-			<layout>default</layout>
-		</repository>
-		<snapshotRepository>
-			<uniqueVersion>false</uniqueVersion>
-			<id>snapshots</id>
-			<name>Proxy Snapshots</name>
-			<url>${proxy.url.base}/libs-snapshots-local</url>
-		</snapshotRepository>
-		<site>
-			<id>internal</id>
-			<name>Internal Server</name>
-			<url>${target.site.url}</url>
-		</site>
-	</distributionManagement>
 	<build>
 		<pluginManagement>
 			<plugins>
@@ -96,16 +63,4 @@
 			</plugins>
 		</pluginManagement>
 	</build>
-	<modules>
-		<module>meredith-parent</module>
-		<module>meredith</module>
-		<module>meredith-bot-adapter-hubot</module>
-		<module>meredith-bot-api</module>
-		<module>meredith-bot-adapter-slack</module>
-		<module>meredith-bot-brain-redis</module>
-		<module>meredith-bot-brain-localmapped</module>
-		<module>meredith-bot-worker-shell</module>
-		<module>meredith-bot-processor</module>
-		<module>meredith-bot</module>
-	</modules>
 </project>
