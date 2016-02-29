@@ -35,7 +35,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>meredithbot-api</artifactId>
+			<artifactId>meredith-bot-api</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>

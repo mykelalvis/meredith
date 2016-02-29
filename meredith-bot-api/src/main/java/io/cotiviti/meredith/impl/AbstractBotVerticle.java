@@ -36,7 +36,7 @@ import io.vertx.core.json.JsonObject;
 /**
  * AbstractBotVerticle should respond to control messages on BotChannel.CONTROL
  * 
- * @author malvis
+ * @author mykelalvis
  *
  */
 public abstract class AbstractBotVerticle extends AbstractVerticle implements BotInitializable {

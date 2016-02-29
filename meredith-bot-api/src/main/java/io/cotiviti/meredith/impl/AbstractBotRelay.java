@@ -29,7 +29,7 @@ import io.cotiviti.meredith.BotRelay;
  * The acceptance order is meant to be implementation-specific, but applying
  * Accept first and Reject second is the preferred implementation.
  * 
- * @author malvis
+ * @author mykelalvis
  *
  */
 abstract public class AbstractBotRelay extends AbstractBotVerticle implements BotRelay {

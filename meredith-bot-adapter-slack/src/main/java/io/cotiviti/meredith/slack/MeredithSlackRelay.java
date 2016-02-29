@@ -59,7 +59,7 @@ public class MeredithSlackRelay extends AbstractBotRelay {
 		}
 		EventBus eb = vertx.eventBus();
 		MessageConsumer<JsonObject> c = eb.consumer(BotChannel.INBOUNDMESSAGES, handleInboundSlackMessage());
-		// TODO Do I need to make this registration async?  I don't think I do...
+		// TODO Do I need to make this registration async?  I think that I must not...
 		session.addMessagePostedListener((e, s) -> eb.publish(BotChannel.OUTBOUNDMESSAGES,
 				new BotMessageImpl(new JsonObject(e.getJsonSource().toJSONString()), e.getSender().getId(),
 						e.getChannel().getId(), translateEvent(e))));

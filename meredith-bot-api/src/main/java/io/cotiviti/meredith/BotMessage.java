@@ -23,7 +23,7 @@ package io.cotiviti.meredith;
  * A BotMessage back to the chat system is meant to be extracted from the
  * payload and sent along (after appropriate processing).
  * 
- * @author malvis
+ * @author mykelalvis
  *
  */
 public interface BotMessage extends BotBaseMessage {

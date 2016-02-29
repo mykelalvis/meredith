@@ -17,7 +17,7 @@
  * 
  */
 /**
- * @author malvis
+ * @author mykelalvis
  *
  */
 package io.cotiviti.meredith;
